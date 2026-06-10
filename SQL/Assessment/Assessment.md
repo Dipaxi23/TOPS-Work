@@ -266,4 +266,4 @@ ORDER BY total_loss;
 
 The analysis revealed that discounting has a significant impact on profit. Furniture products in the Central region showed the lowest profit due to high discount rates. Conversely, Office Supplies in the West region showed highest profit with lower discount rates.
 
-These findings demonstrate how SQL can be used to identify underperforming business segments and support data-driven decision-making.
+These findings demonstrate how SQL can be used to identify underperforming business segments and support data driven decision making.
