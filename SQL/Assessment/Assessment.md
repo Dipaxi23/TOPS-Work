@@ -4,13 +4,13 @@
 
 ## Dataset Preview
 
-![Dataset Preview](https://github.com/Dipaxi23/TOPS-Work/blob/14036c74e55811c70964c6013053d452d9610606/SQL/Assessment/Screenshot%20(1482).png)
+![Dataset Preview](https://github.com/Dipaxi23/TOPS-Work/blob/8650af4b27f72ed137a362db680dbd8a32b60ee7/SQL/Assessment/Screenshot%20(1487).png)
 
 ---
 
 ## Database Import
 
-![Database Schema](https://github.com/Dipaxi23/TOPS-Work/blob/14036c74e55811c70964c6013053d452d9610606/SQL/Assessment/Screenshot%20(1481).png)
+![Database Schema](https://github.com/Dipaxi23/TOPS-Work/blob/8650af4b27f72ed137a362db680dbd8a32b60ee7/SQL/Assessment/Screenshot%20(1489).png)
 
 ---
 
@@ -131,7 +131,7 @@ ORDER BY avg_discount DESC;
 
 ## Query Output
 
-![Profit Margin Analysis](https://github.com/Dipaxi23/TOPS-Work/blob/14036c74e55811c70964c6013053d452d9610606/SQL/Assessment/Screenshot%20(1483).png)
+![Profit Margin Analysis](https://github.com/Dipaxi23/TOPS-Work/blob/8650af4b27f72ed137a362db680dbd8a32b60ee7/SQL/Assessment/Screenshot%20(1490).png)
 
 ---
 
@@ -238,7 +238,7 @@ GROUP BY Region;
 
 ### Output
 
-![Regional Report](https://github.com/Dipaxi23/TOPS-Work/blob/14036c74e55811c70964c6013053d452d9610606/SQL/Assessment/Screenshot%20(1484).png)
+![Regional Report](https://github.com/Dipaxi23/TOPS-Work/blob/8650af4b27f72ed137a362db680dbd8a32b60ee7/SQL/Assessment/Screenshot%20(1491).png)
 
 ---
 
@@ -258,7 +258,7 @@ ORDER BY total_loss;
 
 ### Output
 
-![Loss Report](https://github.com/Dipaxi23/TOPS-Work/blob/8166a705668be1383fc40edcda47485096376ef8/SQL/Assessment/Screenshot%20(1485).png)
+![Loss Report](https://github.com/Dipaxi23/TOPS-Work/blob/8650af4b27f72ed137a362db680dbd8a32b60ee7/SQL/Assessment/Screenshot%20(1492).png)
 
 ---
 
