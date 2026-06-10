@@ -4,20 +4,13 @@
 
 ## Dataset Preview
 
-Add screenshot here:
+![Dataset Preview](https://github.com/Dipaxi23/TOPS-Work/blob/14036c74e55811c70964c6013053d452d9610606/SQL/Assessment/Screenshot%20(1482).png)
 
-```md
-![Dataset Preview](images/dataset-preview.png)
-```
 ---
 
 ## Database Import
 
-Add screenshot of imported table structure.
-
-```md
-![Database Schema](images/schema.png)
-```
+![Database Schema](https://github.com/Dipaxi23/TOPS-Work/blob/14036c74e55811c70964c6013053d452d9610606/SQL/Assessment/Screenshot%20(1481).png)
 
 ---
 
@@ -138,11 +131,8 @@ ORDER BY avg_discount DESC;
 
 ## Query Output
 
-Add screenshot here:
+![Profit Margin Analysis](https://github.com/Dipaxi23/TOPS-Work/blob/14036c74e55811c70964c6013053d452d9610606/SQL/Assessment/Screenshot%20(1483).png)
 
-```md
-![Profit Margin Analysis](images/profit-analysis.png)
-```
 ---
 
 ## Findings
@@ -248,9 +238,7 @@ GROUP BY Region;
 
 ### Output
 
-```md
-![Regional Report](images/regional-report.png)
-```
+![Regional Report](https://github.com/Dipaxi23/TOPS-Work/blob/14036c74e55811c70964c6013053d452d9610606/SQL/Assessment/Screenshot%20(1484).png)
 
 ---
 
@@ -270,9 +258,7 @@ ORDER BY total_loss;
 
 ### Output
 
-```md
-![Loss Report](images/loss-report.png)
-```
+![Loss Report](https://github.com/Dipaxi23/TOPS-Work/blob/8166a705668be1383fc40edcda47485096376ef8/SQL/Assessment/Screenshot%20(1485).png)
 
 ---
 
