@@ -79,155 +79,194 @@ insert into order_items values
 (24, 1015, 109, 1),
 (25, 1015, 110, 6);
 
-update customers set city='Mumbai' where cust_id=6
+update customers set city='Mumbai' where cust_id=6;
 insert into customers values(11, 'Vidisha Mukharjee', 'Kolkata', 'vidisha@gmail.com', '2022-03-23');
 
----- Show all customers who live in Mumbai ---
+-- Show all customers who live in Mumbai ---
 select * from customers where city='Mumbai'
 
----- Display names of all products in the “Electronics” category
+-- Display names of all products in the “Electronics” category
 select * from products where category='electronics'
 
----- List all orders that were delivered
+-- List all orders that were delivered
 select * from orders1 where status='delivered'
 
----- Find customers who joined after January 2023
+-- Find customers who joined after January 2023
 select * from customers where join_date>'2023-01-31'
 
----- Display products whose price is greater than ₹10,000
+-- Display products whose price is greater than ₹10,000
 select * from products where price>10000
 
----- Show the total number of customers
+-- Show the total number of customers
 select count(*) from customers
 
----- Display product names with their stock quantity
+-- Display product names with their stock quantity
 select prod_name,stock from products
 
----- List orders placed in August 2023
+-- List orders placed in August 2023
 select * from orders1 where order_date between '2023-08-01' and '2023-08-31'
 
----- Show customers whose name starts with “S”
+-- Show customers whose name starts with “S”
 select * from customers where cust_name like's%'
 
----- Display the cheapest produc
+-- Display the cheapest product
 select * from products order by price asc limit 1
 
----- Count how many orders each customer has placed
+-- Count how many orders each customer has placed
 select cust_name,count(order_id) as 'order placed' from customers,orders1
 where customers.cust_id=orders1.cust_id
 group by cust_name
 
----- Find the total quantity of products ordered in each order
+-- Find the total quantity of products ordered in each order
 select order_id, sum(quantity) as 'total quantity' from order_items
 group by order_id
 
----- Show each customer’s name and the total value of their delivered orders   ----????----
-select cust_name, sum(price*quantity) as 'total value' from customers
+-- Show each customer’s name and the total value of their delivered orders
+select customers.cust_name, sum(products.price*order_items.quantity) as total_value
+from customers
 join orders1 on customers.cust_id=orders1.cust_id
-join 
-where orders1.status='delivered'
-group by cust_name
+join order_items on orders1.order_id=order_items.order_id
+join products on order_items.prod_id=products.prod_id
+where orders1.status='Delivered'
+group by customers.cust_name;
 
----- Display the most expensive product in each category    ----????----
-select category from products order by price desc limit 1
-group by category
+-- Display the most expensive product in each category  
+select category, prod_name, price
+from products p1
+where price=(select max(price)
+		     from products p2
+             where p1.category = p2.category);
 
----- Find customers who have never placed an order
+-- Find customers who have never placed an order
 select customers.cust_id, customers.cust_name from customers
 left join orders1 on customers.cust_id=orders1.cust_id
 where orders1.order_id is null
 
----- Show total sales (price × quantity) of each product
+-- Show total sales (price × quantity) of each product
 select prod_name,sum(price*quantity) from products,order_items
 where order_items.prod_id=products.prod_id
 group by prod_name
 
----- List all products that have been ordered more than 2 times
+-- List all products that have been ordered more than 2 times
 select prod_name,count(order_items.prod_id) from products,order_items
 where products.prod_id=order_items.prod_id
 group by prod_name having count(order_items.prod_id)>2
 
----- Find the total revenue generated in 2023    ----year??? ----
+-- Find the total revenue generated in 2023  
 select sum(products.price * order_items.quantity) as 'total_revenue'
 from orders1
 join order_items on orders1.order_id=order_items.order_id
 join products on order_items.prod_id=products.prod_id
 where year(orders1.order_date)=2023;
 
----- Display all orders along with customer names and order status
+-- Display all orders along with customer names and order status
 select order_id,cust_name, status from orders1
 join customers on orders1.cust_id=customers.cust_id
 
----- Show the number of “Delivered” vs “Cancelled” orders      ----shows only delivered----
-select status, count(*) from orders1
-where status='delivered' or 'cancelled'
-group by status
+-- Show the number of “Delivered” vs “Cancelled” orders 
+select status, count(*) as total_orders
+from orders1
+where status in('Delivered','Cancelled')
+group by status;
 
----- Find the top 3 customers with the highest total spending
-select customers.cust_id, cust_name, sum(products.price*order_items.quantity) as 'highest spending'
+-- Find the top 3 customers with the highest total spending
+select customers.cust_id, cust_name, sum(products.price*order_items.quantity) as highest_spending
 from customers
 join orders1 on orders1.cust_id=customers.cust_id
 join order_items on order_items.order_id=orders1.order_id
 join products on order_items.prod_id=products.prod_id
 group by cust_id, cust_name
-order by 'highest spending' desc 
-limit 3
+order by highest_spending desc 
+limit 3;
 
----- Display the product categories ranked by total sales
-select category, prod_name,
-sum(products.price*order_items.quantity) as 'total sales'
+-- Display the product categories ranked by total sales
+select category,
+sum(products.price * order_items.quantity) as total_sales,
+rank() over(order by sum(products.price * order_items.quantity) desc) as ranking
 from products
 join order_items on order_items.prod_id=products.prod_id
-group by category, prod_name
+group by category;
 
----- Find customers who have purchased both “Laptop” and “Headphones”    -----they did not purchase both ????----
-select cust_name,customers.cust_id from customers
-join orders1 on orders1.cust_id=customers.cust_id
-join order_items on order_items.order_id=orders1.order_id
-join products on products.prod_id=order_items.prod_id
-where products.prod_name in ('laptop','headphones')
-group by cust_name,customers.cust_id
+-- Find customers who have purchased both “Laptop” and “Headphones”  
+select customers.cust_id, customers.cust_name
+from customers
+join orders1 on customers.cust_id=orders1.cust_id
+join order_items on orders1.order_id=order_items.order_id
+join products on order_items.prod_id=products.prod_id
+where products.prod_name in('Laptop', 'Headphones')
+group by customers.cust_id, customers.cust_name
+having count(distinct products.prod_name)=2;
 
----- Show products that were never ordered    ----is it because there were no orders that were never ordered???----
-select prod_name, count(order_items.order_id)
+-- Show products that were never ordered  
+select products.prod_id, products.prod_name
 from products
-join order_items on order_items.prod_id=products.prod_id
-join orders1 on orders1.order_id=order_items.order_id
-where order_items.order_id is null
-group by prod_name
+left join order_items
+on products.prod_id=order_items.prod_id
+where order_items.prod_id is null;
 
----- Find orders with multiple products from different categories    ----is this right????----
-select category, prod_name, count(order_items.prod_id)
-from products
-join order_items on order_items.prod_id=products.prod_id
-join orders1 on orders1.order_id=order_items.order_id
-group by category,prod_name having count(order_items.prod_id)>2
-
----- Calculate each month’s total revenue and show a running total            ------?????-------
-select sum(products.price*order_items.quantity) as "each month's total_revenue"
+-- Find orders with multiple products from different categories
+select orders1.order_id, count(distinct products.category) as category_count
 from orders1
 join order_items on orders1.order_id=order_items.order_id
 join products on order_items.prod_id=products.prod_id
-where month(orders1.order_date);
+group by orders1.order_id
+having count(distinct products.category)>1;
 
----- Display the average order value per customer      -----????---
-select cust_name, avg(price,quantity) as 'order value' from customers
+-- Calculate each month’s total revenue and show a running total      
+select month(order_date) as month_no,
+sum(products.price*order_items.quantity) as monthly_revenue,
+sum(sum(products.price*order_items.quantity))
+over (order by month(order_date)) as running_total
+from orders1
+join order_items on orders1.order_id=order_items.order_id
+join products on order_items.prod_id=products.prod_id
+group by month(order_date)
+order by month_no;
+
+-- Display the average order value per customer 
+select customers.cust_name,
+avg(products.price * order_items.quantity) as average_order_value
+from customers
 join orders1 on customers.cust_id=orders1.cust_id
-where orders1.status='delivered'
-group by cust_name
+join order_items on orders1.order_id=order_items.order_id
+join products on order_items.prod_id=products.prod_id
+where orders1.status='Delivered'
+group by customers.cust_name;
 
----- Show the most frequently ordered product
+-- Show the most frequently ordered product
 select products.prod_id, products.prod_name,
 count(*) as 'order count'
 from order_items
 join products on order_items.prod_id=products.prod_id
 group by products.prod_id, products.prod_name
 order by 'order count' desc
-limit 1
+limit 1;
 
----- List customers who placed orders in at least 3 different months
+-- List customers who placed orders in at least 3 different months
+select customers.cust_id, customers.cust_name,
+count(distinct month(order_date)) as months_count
+from customers
+join orders1 on customers.cust_id=orders1.cust_id
+group by customers.cust_id, customers.cust_name
+having count(distinct month(order_date))>= 3;
 
----- Find products that are out of stock or nearly out of stock (less than 25 units).
+-- Find products that are out of stock or nearly out of stock (less than 25 units).
 select prod_id,prod_name,stock
 from products
-where stock<25
+where stock<25;
+
+-- Assign row number to customers based on join date
+select cust_name, join_date, row_number() over (order by join_date) as 'joining' from customers;
+
+-- rank products by price
+select prod_name, price, rank() over (order by price) as 'Amount' from products;
+
+-- dense rank products by price
+select prod_name, price, dense_rank() over (order by price) as 'Amount' from products;
+
+-- Number orders for each customer separately 
+select cust_id, order_id, order_date, row_number() over (partition by cust_id order by order_date asc) as order_number
+from orders1;
+
+
+
