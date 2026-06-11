@@ -69,8 +69,8 @@ where Product_Name = 'mobile';
 ----- fetch max quantity ordered
 select max(Quantity) from order_details1;
 
------- fetch order quantity by each customer   ?????
-select sum(Quantity),Cust_Name from order_details1 right join customer1 on order_details1.C_ID=customer1.Custm_ID
+------ fetch order quantity by each customer  
+select sum(Quantity),Cust_Name from order_details1 join customer1 on order_details1.C_ID=customer1.Custm_ID
 group by Cust_Name;
 
 ]----- fetch no of orders by each product
