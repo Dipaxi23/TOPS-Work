@@ -1,0 +1,21 @@
+[
+    {
+        "customer_name": "Dipaxi",
+        "items": [
+            "pizza",
+            "pasta"
+        ],
+        "total_amount": 750.34,
+        "status": "pending"
+    },
+    {
+        "customer_name": "jheel",
+        "items": [
+            "burger",
+            "lemonade",
+            "brownie"
+        ],
+        "total_amount": 490.24,
+        "status": "delivered"
+    }
+]

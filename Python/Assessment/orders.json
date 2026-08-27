@@ -1,0 +1,45 @@
+[
+    {
+        "order_id": 1,
+        "customer_name": "Jane Doe",
+        "items": [
+            "burger",
+            "pasta",
+            "pizza"
+        ],
+        "total_amount": 980.39,
+        "status": "Pending"
+    },
+    {
+        "order_id": 2,
+        "customer_name": "John Doe",
+        "items": [
+            "kimchi ramen",
+            "gimbap",
+            "kimchi fried rice"
+        ],
+        "total_amount": 1038.23,
+        "status": "Pending"
+    },
+    {
+        "order_id": 3,
+        "customer_name": "Patrick Jane",
+        "items": [
+            "hawaiin pizza",
+            "lemonade",
+            "ice cream"
+        ],
+        "total_amount": 790.24,
+        "status": "Pending"
+    },
+    {
+        "order_id": 4,
+        "customer_name": "Kimball Cho",
+        "items": [
+            "bao buns",
+            "suhsi"
+        ],
+        "total_amount": 450.0,
+        "status": "Pending"
+    }
+]
