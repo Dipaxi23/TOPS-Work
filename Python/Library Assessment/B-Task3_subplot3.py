@@ -1,0 +1,15 @@
+import numpy as np
+import matplotlib.pyplot as plt
+np.random.seed(42)
+delivery_time=np.random.normal(loc=28,scale=4,size=500)
+mean=np.mean(delivery_time)
+plt.figure(figsize=(8,5))
+plt.hist(delivery_time,bins=15,edgecolor='black')
+plt.axvline(mean,color='red',linestyle='--',label='Mean')
+plt.title('Delivery Times Distribution')
+plt.xlabel('Delivery Time (minutes)')
+plt.ylabel('Frequency')
+plt.legend()
+plt.tight_layout()
+plt.savefig('delivery_times.png',dpi=150)
+plt.show()
